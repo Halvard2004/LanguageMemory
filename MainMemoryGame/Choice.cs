@@ -3,8 +3,8 @@
 public class Choice
 {
     public int Id { get; private set; }
-    internal Option Original;
-    internal Option Translated;
+    internal readonly Option Original;
+    internal readonly Option Translated;
 
     public Choice(int id, string originalWord, int originalLanguage, string translatedWord, int translatedLanguage)
     {

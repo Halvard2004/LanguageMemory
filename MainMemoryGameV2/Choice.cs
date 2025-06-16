@@ -12,4 +12,11 @@ public class Choice
         Original = new Option(id, originalLanguage, originalWord);
         Translated = new Option(id, translatedLanguage, translatedWord);
     }
+
+    public Choice(int id, Option original, Option translated)
+    {
+        Id = id;
+        Original = original;
+        Translated = translated;
+    }
 }

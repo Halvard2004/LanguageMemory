@@ -1,8 +1,8 @@
 ﻿namespace MainMemoryGame;
 
-public enum Language
+public enum Languages
 {
-    Norwegian,
+    Norwegian = 1,
     English,
     Italian,
     Spanish,
