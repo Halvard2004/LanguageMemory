@@ -4,10 +4,13 @@ public class Main
 {
     private List<Theme> _themes = new List<Theme>();
     private readonly List<Choice> _choices = new List<Choice>();
-    private readonly List<Option> _choices2 = new List<Option>();
+    private readonly List<Option> _options = new List<Option>();
     private Random _random = new Random();
+   
+    
     public void Run()
     {
+        while (true){
         Console.WriteLine("""
                            1) To Add/Delete/Edit Themes
                            2) Play Game
@@ -28,7 +31,7 @@ public class Main
                          
         
         
-        
+        }
     }
 
     private void EditThemeMenu()
@@ -105,7 +108,8 @@ public class Main
                               2) To Delete a Choice
                               3) To Edit Choice
                               4) To Edit Theme Name
-                              5) Return
+                              5) Change Activation
+                              6) Return
                               """);
             var input = Console.ReadKey(true);
             switch (input.Key)
@@ -121,8 +125,18 @@ public class Main
                     // _themes[selected].EditTheme();
                     break;
                 case ConsoleKey.D4:
+                    var inputName = Console.ReadLine();
+                    if (inputName == "")
+                    {
+                        Console.WriteLine("Invalid, please write a name try again.");
+                        continue;
+                    }
+                    _themes[selectedTheme].ChangeThemeName(inputName);
                     break;
                 case ConsoleKey.D5:
+                    _themes[selectedTheme].ChangeActive();
+                    break;
+                case ConsoleKey.D6:
                     return;
                 default:
                     Console.Clear();
@@ -285,12 +299,17 @@ public class Main
     
         private void StartGame()
         {
-            foreach (var choice in _choices)
+            var themes = _themes.Where(x => x.Active is true);
+            foreach (var theme in themes)
             {
-                _choices2.Add(choice.Original);
-                _choices2.Add(choice.Translated);
+                foreach (var choice in theme.Choices)
+                {
+                    _options.Add(choice.Original);
+                    _options.Add(choice.Translated);
+                    
+                }
             }
-            Randomize(_choices2);
+            Randomize(_options);
         
             while (true)
             {
@@ -302,9 +321,9 @@ public class Main
         private void ShowGame()
         {
             int amountofChoices = 0;
-            foreach (var choice in _choices2)
+            foreach (var option in _options)
             {
-                Console.Write(choice + "     ");
+                Console.Write(option + "     ");
                 amountofChoices++;
                 if (amountofChoices % 5 == 0)
                 {

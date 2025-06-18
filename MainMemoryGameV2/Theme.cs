@@ -5,20 +5,20 @@ public class Theme
     public string ThemeName { get; private set; }
     public int ThemeId { get; private set; }
     public List<Choice> Choices { get; private set; } = new List<Choice>();
-    private bool _active;
+    public bool Active { get; private set; }
 
     public Theme(string themeName, int themeId, bool active)
     {
         ThemeName = themeName;
         ThemeId = themeId;
-        _active = active;
+        Active = active;
     }
 
     public Theme(string themeName, int themeId)
     {
         ThemeName = themeName;
         ThemeId = themeId;
-        _active = false;
+        Active = false;
     }
 
     public void ChangeThemeName(string newThemeName)
@@ -28,7 +28,7 @@ public class Theme
 
     public void ChangeActive()
     {
-        _active = !_active;
+        Active = !Active;
     }
 
     public void AddChoice(Choice choice)
